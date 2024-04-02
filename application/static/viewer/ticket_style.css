@@ -42,9 +42,26 @@ p {
 }
 
 #qr {
-    width: 12vh;
+    width: 32vh;
+    margin: 0.4vh;
 }
 
 .inline > * {
     display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: orange;
+}
+
+.small {
+    font-size: 1.6vh;
+}
+
+#status {
+    display: inline-block;
+    background-color: yellow;
+    border: 0.2vh solid black;
+    font-size: 2.4vh;
 }

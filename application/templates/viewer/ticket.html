@@ -38,15 +38,15 @@
             <p>Carril: </p>
             <p class="strong">{{ ticket.trip.boarding_gate }}</p>
         </div>
-        <p id="status">{{ ticket.status }}</p>
+        <p id="status">{{ ticket.status }}</p><br>
         <img src="{{ ticket.qr_url }}" id="qr">
         <p>Servicio: {{ ticket.service_number }}</p>
         <p>Total: $ {{ ticket.total_payment }}</p>
         <p>Metodo de pago: {{ ticket.payment_method }}</p>
         <p>Operacion: {{ ticket.operation_number }}</p>
         <p>Token: {{ ticket.billing_token }}</p>
-        <p>En caso de tener algun problema, comunicate al numero (+52) 477 710 00 60</p>
-        <p>Consulte el siguiente link para ver <a href="">terminos y condiciones</a></p>
+        <p class="small">En caso de tener algun problema, comunicate al numero (+52) 477 710 00 60</p>
+        <p class="small">Consulte el siguiente link para ver <a href="">terminos y condiciones</a></p>
     </div>
 </body>
 </html>
