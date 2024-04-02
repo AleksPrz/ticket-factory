@@ -11,14 +11,36 @@ def create_ticket():
 
     data = request.form
 
-    #Create trip
+    trip = get_trip(data)
 
-    #Create ticket
+    new_ticket = Ticket(
+        passenger_name = data.get("passenger_name"),
+        email = data.get("email"),
+        seat_number = data.get("seat_number"),
+        category = data.get("category"),
+        status = "VIGENTE",     #A new ticket is ACTIVE BY DEFAULT
+        service_number = data.get("service_number"),
+        operation_number = data.get("operation_number"),
+        payment_method = data.get("payment_method"),
+        total_payment = data.get("total_payment"),
+        billing_token = data.get("billing_token"),
 
-    #Create qr
+        #wallet_url = "www.com",
 
-    #update the database
-    pass
+        trip = trip
+    )
+
+    db.session.add(new_ticket) #We add the new ticket to the database in order to generate its id
+    db.session.commit()
+
+    #QR
+    new_ticket.qr_url = create_qr(new_ticket)
+    db.session.commit()
+
+    #SEND THE TICKET TO USER
+
+    print(new_ticket.id)
+    return jsonify({})
 
 
 def get_trip(data: dict) -> Trip:
