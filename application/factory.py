@@ -17,8 +17,6 @@ def create_ticket():
 
     #Create qr
 
-    
-
     #update the database
     pass
 
@@ -58,7 +56,9 @@ def get_trip(data: dict) -> Trip:
 
 def create_qr(ticket: Ticket) -> str:
     """
-    Creates the qr images and saves it locally
+    Creates the qr image and saves it locally
+    The qr contains plain text that can be converted into a JSON object that contains the following attributes:
+    ticket id, trip, passenger name and category
     """
 
     data = f"{{\"id\": {ticket.id}, \"trip\": {ticket.trip_id}, \"passenger_name\": \"{ticket.passenger_name}\", \"category\": \"{ticket.category}\"}}"
