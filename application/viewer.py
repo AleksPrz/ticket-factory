@@ -38,18 +38,24 @@ def view_ticket(ticket_id):
             return render_template("viewer/ticket.html", ticket = ticket_data, url = ticket_url)
 
         elif request.method == 'POST':  #Notifications allowed
-            print()
+            #Converts the subscription object to plain text
+            data = json.dumps(request.json)
+            print(data)
             
+            subscription = ticket.web_subscription  #IF THE TICKET ALREADY HAD A SUSCRIPTION, DELETES IT
+            if subscription:
+                db.session.delete(subscription)
+                db.session.commit()
 
-        
+            subscription = WebSubscription(data = data)
+            ticket.web_subscription = subscription
 
-    # If the ticket exists, view the ticket with a GET method
-
-    # Else if the user's method is POST, enable notifications
-
-    # Else, return message "not found"
-
-    pass
+            db.session.add(subscription)
+            db.session.commit()
+            return jsonify({'status': 'sucess', 'message': 'subscription saved'})
+    
+    else:
+        return jsonify({"error": "Not Found"}), 404
 
 
 @viewer.route('/service_worker.js', methods=['GET'])
