@@ -24,6 +24,10 @@ def create_app():
     app.register_blueprint(factory, url_prefix = '/factory')
     app.register_blueprint(viewer, url_prefix = '/view')
 
+    from .models import Ticket, Trip, WebSubscription
+
+    create_database()
+
     return app
 
 def create_database(app):
