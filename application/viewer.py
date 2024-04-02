@@ -7,7 +7,7 @@ import json
 
 viewer = Blueprint('viewer', __name__, static_folder= "static/viewer")
 
-@viewer.route("/<int::ticket_id>", methods = ['GET', 'POST'])
+@viewer.route("/<int:ticket_id>", methods = ['GET', 'POST'])
 def view_ticket(ticket_id):
 
     ticket = Ticket.query.filter_by(id = ticket_id).first() #Look for the ticket in the database
