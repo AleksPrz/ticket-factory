@@ -11,7 +11,14 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "0123456789" #Arbritrary key that allows to send flash messages
 
-    #DATABASE SETUPS
+    #DATABASE SETUP
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
+    app.app_context().push()
+
+    from .models import Ticket, Trip, WebSubscription
+    create_database(app)
 
     #TO HANDLE REQUESTS FROM EXTERNAL SOURCES
     CORS(app, origins= "*") #origins = "*" IS NOT SECURE CAUSE WE ARE ALLOWING REQUESTS FROM EVERYWHERE
@@ -23,10 +30,6 @@ def create_app():
     app.register_blueprint(notifier, url_prefix = '/')
     app.register_blueprint(factory, url_prefix = '/factory')
     app.register_blueprint(viewer, url_prefix = '/view')
-
-    from .models import Ticket, Trip, WebSubscription
-
-    create_database()
 
     return app
 
