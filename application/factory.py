@@ -15,8 +15,13 @@ def create_ticket():
 
     #Create ticket
 
+    #Create qr
+
+    
+
     #update the database
     pass
+
 
 def get_trip(data: dict) -> Trip:
     """Checks if exists a trip with the given atributes
@@ -51,5 +56,22 @@ def get_trip(data: dict) -> Trip:
     return trip
 
 
+def create_qr(ticket: Ticket) -> str:
+    """
+    Creates the qr images and saves it locally
+    """
+
+    data = f"{{\"id\": {ticket.id}, \"trip\": {ticket.trip_id}, \"passenger_name\": \"{ticket.passenger_name}\", \"category\": \"{ticket.category}\"}}"
+
+    qr = qrcode.QRCode(version = 1, box_size = 10, border = 5)
+    qr.add_data(data)
+    qr.make(fit = True)
+
+    img = qr.make_image(fill = 'black', back_color = 'white')
+    
+    url_image = f'application/static/viewer/qr/{ticket.id}.png'
+    img.save(url_image)
+
+    return f"../../static/viewer/qr/{ticket.id}.png"
 
 
