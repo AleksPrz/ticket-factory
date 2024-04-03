@@ -1,10 +1,10 @@
+# Make a POST request to create a ticket using test data
+
 import requests
 
-url = "http://127.0.0.1:5000"
-
-datos = {
-    "email": "example2@you",
-    "passenger_name" : "PRUEBA FINAL",
+test_data = {
+    "email": "migtorruco@gmail.com",
+    "passenger_name" : "Miguel",
     "seat_number" : "12",
     "origin" : "Campeche",
     "destination" : "Guadalajara",
@@ -21,14 +21,7 @@ datos = {
     "service_number" : 76
 }
 
+factory_url = "http://127.0.0.1:5000/factory/create-ticket"
 
-factory = url + "/factory/create-ticket"
-
-factory_get = url + "/factory/get1"
-
-response = requests.post(url = factory, data = datos)
-#response = requests.get(url = factory_get)
+response = requests.post(url = factory_url, data = test_data)
 print(response.text)
-#numero = "hola"
-
-#print(f"{{\"id\": {54}, \"trip\": {26}, \"passenger_name\": \"{"JUAN"}\", \"category\": \"{"ADULTO"}\"}}")
